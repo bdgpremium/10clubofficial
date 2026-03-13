@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BDG WIN </title>
+
+<style>
+body{
+margin:0;
+padding:0;
+height: 100vh;
+width: 100%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial, sans-serif;
+color:#fff;
+background: linear-gradient(135deg, #1a0000 0%, #000000 100%);
+overflow: hidden;
+}
+
+.card{
+width:380px;
+padding:30px;
+border-radius:20px;
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,0.8);
+position: relative;
+}
+
+.title{
+font-size:24px;
+font-weight:bold;
+color:#ff4b5c;
+margin-bottom:20px;
+text-transform: uppercase;
+letter-spacing: 2px;
+text-shadow: 0 0 10px rgba(255, 75, 92, 0.5);
+}
+
+.logo{
+width:90px;
+height:90px;
+border-radius:50%;
+margin-bottom:15px;
+border: 3px solid #ff4b5c;
+box-shadow: 0 0 15px rgba(255, 75, 92, 0.3);
+object-fit: cover;
+background: linear-gradient(45deg, #ff4b5c, #ff2e4d);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 24px;
+color: white;
+font-weight: bold;
+}
+
+.subtitle{
+font-size:14px;
+color:#ff6b6b;
+margin-bottom:10px;
+font-weight: bold;
+letter-spacing: 1px;
+}
+
+.timer{
+font-size:36px;
+font-weight:bold;
+color:#fff;
+margin:10px 0;
+font-family: 'Courier New', monospace;
+text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.live{
+font-size:14px;
+color:#ccc;
+margin-bottom:25px;
+}
+
+.live span{
+color:#fbbf24;
+font-weight:bold;
+}
+
+.btn{
+display:block;
+padding:15px;
+margin:10px 0;
+border-radius:12px;
+font-weight:bold;
+text-decoration:none;
+transition: all 0.3s ease;
+border: none;
+cursor: pointer;
+color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.join{
+background: linear-gradient(90deg, #ff4b5c, #ff2e4d);
+}
+
+.tradenova{
+background: linear-gradient(90deg, #00d4ff, #0099cc);
+font-size: 14px;
+}
+
+.hack{
+background: linear-gradient(90deg, #ff00ff, #cc00cc);
+font-size: 14px;
+}
+
+.vip{
+background: linear-gradient(90deg, #fbbf24, #f59e0b);
+color:#000;
+}
+
+/* Preview Button */
+.preview-btn {
+    background: linear-gradient(90deg, #00ff88, #00cc66);
+    color: #000;
+    font-size: 11px;
+    padding: 6px 12px;
+    margin-top: 5px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.preview-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(0,255,136,0.4);
+}
+
+/* Full Screen Proof Modal */
+.proof-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.98);
+}
+
+.proof-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85vw;
+    height: 85vh;
+    max-width: 500px;
+    background: linear-gradient(135deg, rgba(255,75,92,0.1), rgba(0,0,0,0.8));
+    border-radius: 20px;
+    border: 3px solid #ff4b5c;
+    box-shadow: 0 0 50px rgba(255, 75, 92, 0.8);
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.proof-img-large {
+    width: 100%;
+    height: 70%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 15px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 30px rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(255,75,92,0.8);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: linear-gradient(90deg, #ff4b5c, #ff2e4d);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(255, 75, 92, 0.7);
+}
+
+.close-modal:hover {
+    transform: scale(1.1);
+}
+
+/* Testimonial Style Proofs */
+.testimonials{
+margin-top: 20px;
+padding: 15px;
+background: rgba(255, 255, 255, 0.05);
+border-radius: 15px;
+border: 1px solid rgba(255, 75, 92, 0.3);
+}
+
+.testi-title{
+font-size: 13px;
+color: #ff6b6b;
+font-weight: bold;
+margin-bottom: 12px;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+.testi-grid{
+display: flex;
+justify-content: space-around;
+gap: 5px;
+flex-wrap: wrap;
+}
+
+.testi-item{
+text-align: center;
+flex: 1;
+min-width: 85px;
+}
+
+.testi-img{
+width: 50px;
+height: 50px;
+border-radius: 10px;
+object-fit: cover;
+border: 2px solid #ff4b5c;
+box-shadow: 0 0 10px rgba(255, 75, 92, 0.5);
+margin-bottom: 5px;
+}
+
+.testi-label{
+font-size: 9px;
+color: #ff6b6b;
+font-weight: bold;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.footer{
+margin-top:10px;
+font-size:12px;
+color:#888;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="title">BDG WIN </div>
+
+<div class="logo">BDG</div>
+
+<div class="subtitle">DAILY FREE GIFTCODE</div>
+
+<div id="timer" class="timer">00:30</div>
+
+<div class="live">🔴 LIVE • <span id="users">207</span> USERS IN VC</div>
+
+<a href="https://t.me/+VTJGdiRsF8djYzY1" class="btn join">
+🚀 JOIN NOW
+</a>
+
+<a href="https://tradenova.club" class="btn tradenova" target="_blank">
+🎯 SURE SHOT TRADENOVA
+</a>
+
+<a href="https://t.me/+VTJGdiRsF8djYzY1" class="btn hack" target="_blank">
+🔥 HACK LINK (SURESHOT)
+</a>
+
+<a href="https://t.me/+VTJGdiRsF8djYzY1" class="btn vip">
+💎 VIP CHANNEL ACCESS
+</a>
+
+<!-- Testimonial Style Proofs WITH YOUR BET WON IMAGE -->
+<div class="testimonials">
+    <div class="testi-title">✅ REAL PAYOUT PROOFS</div>
+    <div class="testi-grid">
+        <div class="testi-item">
+            <img class="testi-img" 
+                 src="https://uploads.onecompiler.io/43by6n3b4/44g8me25e/WhatsApp%20Image%202025-10-11%20at%203.43.28%20PM.jpeg" 
+                 alt="Bet Won Proof"
+                 onerror="this.style.background='linear-gradient(45deg,#ff4b5c,#ff6b6b)';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.innerHTML='BET';this.style.fontSize='16px';this.style.color='white';this.style.fontWeight='bold';">
+            <div class="testi-label">BET WON</div>
+            <button class="preview-btn" onclick="showProof('https://uploads.onecompiler.io/43by6n3b4/44g8me25e/WhatsApp%20Image%202025-10-11%20at%203.43.28%20PM.jpeg', '🎯 BET WON PROOF')">📸 VIEW</button>
+        </div>
+        <div class="testi-item">
+            <div class="testi-img" style="background: linear-gradient(45deg, #00ff88, #00cc66); display:flex; align-items:center; justify-content:center; font-size:14px; color:black; font-weight:bold;">W/D</div>
+            <div class="testi-label">WITHDRAWAL</div>
+            <button class="preview-btn" onclick="showProof('https://picsum.photos/550/650?random=2', '💰 WITHDRAWAL PROOF')">📸 VIEW</button>
+        </div>
+        <div class="testi-item">
+            <div class="testi-img" style="background: linear-gradient(45deg, #fbbf24, #f59e0b); display:flex; align-items:center; justify-content:center; font-size:14px; color:black; font-weight:bold;">SAL</div>
+            <div class="testi-label">SALARY</div>
+            <button class="preview-btn" onclick="showProof('https://picsum.photos/550/650?random=3', '💎 SALARY PROOF')">📸 VIEW</button>
+        </div>
+    </div>
+</div>
+
+<div class="footer">Official Channel • Secure Access</div>
+
+</div>
+
+<!-- Full Screen Proof Modal -->
+<div id="proofModal" class="proof-modal" onclick="closeProof()">
+    <div class="proof-content" onclick="event.stopPropagation()">
+        <button class="close-modal" onclick="closeProof()">×</button>
+        <div class="modal-title" id="modalTitle">LOADING PROOF...</div>
+        <img id="proofImg" class="proof-img-large" src="" alt="Proof" onload="this.style.opacity='1'" style="opacity:0; transition:opacity 0.5s;">
+    </div>
+</div>
+
+<script>
+const telegramLink = "https://t.me/+VTJGdiRsF8djYzY1";
+let time = 30;
+
+setInterval(function(){
+    let sec = time % 60;
+    document.getElementById("timer").innerHTML = "00:" + (sec < 10 ? "0" : "") + sec;
+    if (time <= 0) {
+        window.location.href = telegramLink;
+    } else {
+        time--;
+    }
+}, 1000);
+
+setInterval(function(){
+    let users = Math.floor(Math.random()*80)+180;
+    document.getElementById("users").innerText = users;
+}, 3000);
+
+// BET WON IMAGE ATTACHED ✅
+function showProof(imageUrl, titleText = "🔥 REAL PROOF") {
+    const modal = document.getElementById('proofModal');
+    const img = document.getElementById('proofImg');
+    const title = document.getElementById('modalTitle');
+    
+    title.textContent = '⏳ LOADING PROOF...';
+    img.src = imageUrl;
+    img.style.opacity = '0';
+    
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    img.onload = function() {
+        title.textContent = titleText;
+        img.style.opacity = '1';
+    }
+    
+    img.onerror = function() {
+        title.textContent = '❌ IMAGE NOT FOUND';
+        img.style.opacity = '0';
+    }
+}
+
+function closeProof() {
+    const modal = document.getElementById('proofModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// ESC Key Close
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeProof();
+});
+</script>
+
+</body>
+</html>
